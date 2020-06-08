@@ -1,20 +1,24 @@
 import React from "react";
-import { CssBaseline } from "@material-ui/core";
+import { CircularProgress, CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { useQuery } from "react-query";
 
 import { theme } from "./theme";
 import Header from "../Header";
 import PizzaList from "../PizzaList";
-import db from "../db.json";
+
+const fetchPizzas = () =>
+  fetch("http://localhost:3001/pizzas").then((response) => response.json());
 
 export default function App() {
-  const pizzas = db.pizzas;
+  const { status, data } = useQuery("pizzas", fetchPizzas);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header shoppingCartCount={3} />
-      <PizzaList data={pizzas} />
+      {status === "loading" && <CircularProgress />}
+      {status === "success" && <PizzaList data={data} />}
     </ThemeProvider>
   );
 }
