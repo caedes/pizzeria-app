@@ -1,12 +1,30 @@
-import { bool, func } from "prop-types";
+import { arrayOf, bool, func, number, string, shape } from "prop-types";
 import React from "react";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import { isNotEmpty } from "ramda-adjunct";
 
 import Popin from "../Popin";
+import Price from "../Price";
 
-export default function PopinCart({ open, hidePopinCart }) {
+export default function PopinCart({ open, hidePopinCart, cart, reset }) {
   const actions = [
     { label: "Annuler", onClick: hidePopinCart },
-    { label: "Commander", primary: true },
+    {
+      label: "Commander",
+      primary: true,
+      onClick: () => {
+        reset();
+        hidePopinCart();
+      },
+    },
   ];
 
   return (
@@ -16,7 +34,32 @@ export default function PopinCart({ open, hidePopinCart }) {
       title="Passer commande"
       actions={actions}
     >
-      Récapitulatif des pizzas en commande
+      {isNotEmpty(cart) ? (
+        <TableContainer component={Paper}>
+          <Table size="small" aria-label="Ma commande de pizzas">
+            <TableHead>
+              <TableRow>
+                <TableCell>Pizza</TableCell>
+                <TableCell align="right">Prix</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {cart.map(({ addedAt, name, price }) => (
+                <TableRow key={addedAt}>
+                  <TableCell component="th" scope="row">
+                    {name}
+                  </TableCell>
+                  <TableCell align="right">
+                    <Price value={price} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        "Pas de pizzas"
+      )}
     </Popin>
   );
 }
@@ -24,9 +67,20 @@ export default function PopinCart({ open, hidePopinCart }) {
 PopinCart.propTypes = {
   open: bool,
   hidePopinCart: func,
+  cart: arrayOf(
+    shape({
+      id: number,
+      name: string,
+      price: number,
+      addedAt: number,
+    })
+  ),
+  reset: func,
 };
 
 PopinCart.defaultProps = {
   open: false,
   hidePopinCart: Function.prototype,
+  cart: [],
+  reset: Function.prototype,
 };
