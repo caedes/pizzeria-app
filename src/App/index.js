@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { theme } from "./theme";
 import Header from "../Header";
 import PizzaList from "../PizzaList";
+import PopinCart from "../PopinCart";
 
 const fetchPizzas = () => {
   const baseUrlApi =
@@ -16,6 +17,7 @@ const fetchPizzas = () => {
 
 export default function App() {
   const { status, data } = useQuery("pizzas", fetchPizzas);
+  const [popinCartOpen, setPopinCartOpen] = React.useState(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -23,6 +25,7 @@ export default function App() {
       <Header shoppingCartCount={3} />
       {status === "loading" && <CircularProgress />}
       {status === "success" && <PizzaList data={data} />}
+      <PopinCart open={popinCartOpen} />
     </ThemeProvider>
   );
 }
