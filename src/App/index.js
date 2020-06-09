@@ -2,6 +2,7 @@ import React from "react";
 import { CircularProgress, CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { useQuery } from "react-query";
+import { useList } from "react-use";
 
 import { theme } from "./theme";
 import Header from "../Header";
@@ -18,6 +19,7 @@ const fetchPizzas = () => {
 export default function App() {
   const { status, data } = useQuery("pizzas", fetchPizzas);
   const [popinCartOpen, setPopinCartOpen] = React.useState(false);
+  const [cart, { push }] = useList([]);
 
   const displayPopinCart = () => {
     setPopinCartOpen(true);
@@ -30,9 +32,12 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header shoppingCartCount={3} displayPopinCart={displayPopinCart} />
+      <Header
+        shoppingCartCount={cart.length}
+        displayPopinCart={displayPopinCart}
+      />
       {status === "loading" && <CircularProgress />}
-      {status === "success" && <PizzaList data={data} />}
+      {status === "success" && <PizzaList data={data} addToCart={push} />}
       <PopinCart open={popinCartOpen} hidePopinCart={hidePopinCart} />
     </ThemeProvider>
   );
