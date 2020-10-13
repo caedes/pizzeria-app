@@ -13,6 +13,7 @@ import React from "react";
 import { AddBox, IndeterminateCheckBox } from "@material-ui/icons";
 
 import { PIZZAS_MAX_COUNT } from "../pizzas";
+import useCounter from "../useCounter";
 import Price from "../Price";
 
 const imageSize = 175;
@@ -36,10 +37,11 @@ export default function PizzaCard({
 }) {
   const classes = useStyles();
 
-  const [pizzaCount, setPizzaCount] = React.useState(1);
-  const decrement = () => setPizzaCount(Math.max(0, pizzaCount - 1));
-  const increment = () =>
-    setPizzaCount(Math.min(pizzaCount + 1, PIZZAS_MAX_COUNT));
+  const [pizzaCount, { decrement, increment }] = useCounter(
+    1,
+    1,
+    PIZZAS_MAX_COUNT
+  );
 
   return (
     <Card className={classes.root}>
