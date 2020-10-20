@@ -9,7 +9,7 @@
     },
     {
       "id": 2,
-      "name": "Reine",
+      "name": "Margherita",
       "ingredients": [
         "Olives",
         "Tomates",
@@ -18,28 +18,28 @@
         "Champignons"
       ],
       "imageUrl": "https://picsum.photos/350",
-      "price": 8.99
+      "price": 7.99
     },
     {
       "id": 3,
-      "name": "Reine",
+      "name": "Savoyarde",
       "ingredients": ["Olives", "Tomates", "Champignons"],
       "imageUrl": "https://picsum.photos/350",
-      "price": 8.99
+      "price": 12.99
     },
     {
       "id": 4,
-      "name": "Reine",
+      "name": "Norvégienne",
       "ingredients": ["Olives", "Tomates", "Champignons"],
       "imageUrl": "https://picsum.photos/350",
-      "price": 8.99
+      "price": 17.99
     },
     {
       "id": 5,
-      "name": "Reine",
+      "name": "Calzone",
       "ingredients": ["Olives", "Tomates", "Champignons"],
       "imageUrl": "https://picsum.photos/350",
-      "price": 8.99
+      "price": 10.99
     },
     {
       "id": 6,
