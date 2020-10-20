@@ -11,6 +11,7 @@ import { func, number } from "prop-types";
 import { Link } from "react-router-dom";
 
 import useStyles from "./styles";
+import routes from "../App/routes";
 
 export default function Header({ shoppingCartCount, displayPopinCart }) {
   const classes = useStyles();
@@ -22,7 +23,7 @@ export default function Header({ shoppingCartCount, displayPopinCart }) {
           variant="h6"
           component={Link}
           className={classes.title}
-          to="/"
+          to={routes.home.path}
         >
           Pizzeria Nala
         </Typography>
@@ -30,7 +31,7 @@ export default function Header({ shoppingCartCount, displayPopinCart }) {
           aria-label={`${shoppingCartCount} pizzas`}
           color="inherit"
           component={Link}
-          to="/cart"
+          to={routes.cart.path}
         >
           <Badge badgeContent={shoppingCartCount} color="secondary">
             <ShoppingCartIcon />
