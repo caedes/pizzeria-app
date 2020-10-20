@@ -6,15 +6,11 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { func, number } from "prop-types";
+import { Link } from "react-router-dom";
 
-const useStyles = makeStyles({
-  title: {
-    flexGrow: 1,
-  },
-});
+import useStyles from "./styles";
 
 export default function Header({ shoppingCartCount, displayPopinCart }) {
   const classes = useStyles();
@@ -22,13 +18,19 @@ export default function Header({ shoppingCartCount, displayPopinCart }) {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
+        <Typography
+          variant="h6"
+          component={Link}
+          className={classes.title}
+          to="/"
+        >
           Pizzeria Nala
         </Typography>
         <IconButton
           aria-label={`${shoppingCartCount} pizzas`}
           color="inherit"
-          onClick={displayPopinCart}
+          component={Link}
+          to="/cart"
         >
           <Badge badgeContent={shoppingCartCount} color="secondary">
             <ShoppingCartIcon />
