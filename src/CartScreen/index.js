@@ -1,7 +1,7 @@
 import { useList } from "react-use";
 import React from "react";
 
-import PopinCart from "../PopinCart";
+import Cart from "../Cart";
 import Screen from "../Screen";
 
 export default function CartScreen() {
@@ -9,7 +9,7 @@ export default function CartScreen() {
 
   return (
     <Screen>
-      <PopinCart cart={cart} />
+      <Cart cart={cart} />
     </Screen>
   );
 }

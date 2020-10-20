@@ -7,13 +7,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { func, number } from "prop-types";
+import { number } from "prop-types";
 import { Link } from "react-router-dom";
 
 import useStyles from "./styles";
 import routes from "../App/routes";
 
-export default function Header({ shoppingCartCount, displayPopinCart }) {
+export default function Header({ shoppingCartCount }) {
   const classes = useStyles();
 
   return (
@@ -44,10 +44,8 @@ export default function Header({ shoppingCartCount, displayPopinCart }) {
 
 Header.defaultProps = {
   shoppingCartCount: 0,
-  displayPopinCart: Function.prototype,
 };
 
 Header.propTypes = {
   shoppingCartCount: number,
-  displayPopinCart: func,
 };
