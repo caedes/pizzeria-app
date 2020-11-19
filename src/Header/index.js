@@ -1,51 +1,7 @@
-import React from "react";
-import {
-  AppBar,
-  Badge,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { number } from "prop-types";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-import useStyles from "./styles";
-import routes from "../App/routes";
+import Header from "./component";
 
-export default function Header({ shoppingCartCount }) {
-  const classes = useStyles();
+const mapStateToProps = (state) => ({ shoppingCartCount: state.cart.length });
 
-  return (
-    <AppBar position="sticky">
-      <Toolbar>
-        <Typography
-          variant="h6"
-          component={Link}
-          className={classes.title}
-          to={routes.home.path}
-        >
-          Pizzeria Nala
-        </Typography>
-        <IconButton
-          aria-label={`${shoppingCartCount} pizzas`}
-          color="inherit"
-          component={Link}
-          to={routes.cart.path}
-        >
-          <Badge badgeContent={shoppingCartCount} color="secondary">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-      </Toolbar>
-    </AppBar>
-  );
-}
-
-Header.defaultProps = {
-  shoppingCartCount: 0,
-};
-
-Header.propTypes = {
-  shoppingCartCount: number,
-};
+export default connect(mapStateToProps)(Header);

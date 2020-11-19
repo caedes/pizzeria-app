@@ -1,6 +1,6 @@
-export const INIT_PIZZAS = "INIT_PIZZAS";
+export const PIZZAS_INIT = "pizzas/init";
 
 export const initPizzas = (pizzas) => ({
-  type: INIT_PIZZAS,
+  type: PIZZAS_INIT,
   payload: { pizzas },
 });

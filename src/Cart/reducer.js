@@ -1,11 +1,11 @@
-import { PIZZAS_INIT } from "./actions";
+import { CART_ADD } from "./actions";
 
 const initialState = [];
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case PIZZAS_INIT:
-      return action?.payload?.pizzas || state;
+    case CART_ADD:
+      return [...state, action?.payload?.id];
 
     default:
       return state;
