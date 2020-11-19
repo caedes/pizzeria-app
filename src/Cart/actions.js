@@ -2,5 +2,5 @@ export const CART_ADD = "cart/add";
 
 export const addToCart = (id) => ({
   type: CART_ADD,
-  payload: { id },
+  payload: { id, addedAt: Date.now() },
 });
